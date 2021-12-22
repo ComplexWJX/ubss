@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+function init() {
+	//document.write("<ul><li>周一</li><li>周二</li><li>周三</li><li>周四</li></ul>");
+    $("body").append("<ul><li>周一</li><li>周二</li><li>周三</li><li>周四</li></ul>");
+ } 
+ function show(){
+ $("#ol").show();
+ }
+ function hide(){
+ $("#ol").hide();
+ }
+ 
+ //替换页面
+ function replace(){
+ window.location.replace("http://www.baidu.com");
+ }
+ function json(){
+ var str='{"id":"000001","name":"上证指数","now":3198.09,"today":3210.2,"yesterday":3212.3},{"id":"000815","name":"美利纸业","now":11.22,"today":11.21,"yesterday":11.23}';
+ var obj=eval("("+str+")");
+ //alert(document.getElementById("input"));
+ //alert($("#input"));
+ //alert(obj.name+obj.id);
+ }
+ 
+</script>
+</head>
+<body onload="init()">
+<input onfocus="init()"id="input"/>
+<a onmouseover="show()" onmouseout="hide()" href="#" id="link">显示列表</a>
+<ol id="ol" style="display: none">
+<li>周一</li>
+<li>周二</li>
+<li>周三</li>
+</ol>
+<button onclick="replace()">替换页面</button>
+<button onclick="json()">json对象</button>
+</body>
+</html>

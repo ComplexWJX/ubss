@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+	//定义一个contrller
+	function mycontroller($scope, $timeout) {
+		var updatetime = function() {
+			$scope.time = new Date();
+			$timeout(function() {
+				updatetime();
+			}, 1000);
+		}
+		updatetime();
+	}
+
+	function controller1() {
+		alert('controller1')
+	}
+
+	$(function() {
+		showtime();
+	})
+
+	//dom实现原理
+	function showtime() {
+		gettime();
+		setInterval(gettime, 1000);
+	}
+	function gettime() {
+		var now_time = new Date();
+		$("h2").text(now_time);
+	}
+</script>
+</head>
+<body>
+	<div ng-controller="mycontroller">
+		<h3>{{time}}</h3>
+	</div>
+	<h2 id="h2"></h2>
+
+	<div ng-controller="controller1"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>angular 双向绑定</title>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		//jQuery对象
+		var btn = $("<button>Hi</button>");
+		var lbl = $("<h3>label</h3>");
+		btn.on('click', function(evt) {
+			console.log("Clicked button");
+		});
+		lbl.bind('mouseover', function() {
+			console.log($(this).text());
+		});
+		$("#checkoutHolder").append(btn).append(lbl);
+	})
+</script>
+</head>
+<body>
+<div id="checkoutHolder">
+<input placeholder="input here" ng-model="name"/>
+<h2>{{name}}</h2>
+</div>
+</body>
+</html>

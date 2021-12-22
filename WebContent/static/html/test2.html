@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js">
+	
+</script>
+<script type="text/javascript">
+	var str = "";
+	function showValue() {
+		var sel = $("#sel");
+		sel.children().each(function() {
+			if ($(this).attr("selected") == "selected") {
+				str += $(this).val();
+				$("#txtarea").text(str);
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<select id="sel" onchange="showValue()">
+		<option value="开车快">开车</option>
+		<option value="步行环保">步行</option>
+		<option value="公交便宜">公交</option>
+	</select>
+	<textarea id="txtarea" rows="3" cols="8" style="width: 300px;height: 400px"></textarea>
+
+</body>
+</html>

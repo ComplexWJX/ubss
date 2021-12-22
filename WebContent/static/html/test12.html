@@ -1,0 +1,62 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>模态框</title>
+<link rel="stylesheet" href="plugin/bootstrap/css/bootstrap.min.css"
+	type="text/css" />
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#nr').bind({
+			keyup : function() {
+				$('#h3').text($(this).val())
+			},
+			focusout : function() {
+				$('#h3').text("")
+			}
+		});
+
+		//h4事件
+		$('#h4').bind({
+			mouseover : function() {
+			}
+		})
+	})
+	function showModal(nums) {
+		//alert(1)
+		/* $("#mymodal").modal({
+		backdrop:true,    
+		keyboard:true, 
+		show:true 
+		}); */
+		if (nums == 1) {
+			$("#mymodal").attr("style", "display:none");
+		} else if (nums == 2) {
+			$("#mymodal").attr("style", "display:block");
+		}
+	}
+</script>
+</head>
+<body>
+	输入:
+	<input id="nr">
+	<h3 id="h3"></h3>
+	<h4 id="h4">我是h4</h4>
+	<div id="mymodal" style="display: block" class="div">
+		<ul>
+			<li><a href="#" />上一页</li>
+			<li><a href="#" />1</li>
+			<li><a href="#" />2</li>
+			<li><a href="#" />3</li>
+			<li><a href="#" />4</li>
+			<li><a href="#" />下一页</li>
+		</ul>
+	</div>
+	<input type="button" class="btn btn-primary" value="模态框"
+		onclick="showModal(1)" ondblclick="showModal(2)" />
+</body>
+</html>

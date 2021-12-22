@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js">
+	
+</script>
+<script type="text/javascript">
+	$(function() {
+		//alert($("a:first").text());
+		$("a:first").addClass("cur");
+
+		$("#month").find("a").click(function changeClass() {
+			$(this).parent().find('a').removeClass("cur");
+			$(this).addClass("cur");
+		});
+	});
+</script>
+<style>
+* {
+	margin: 20px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.cur {
+	background: orange;
+}
+</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td id="month">
+			<a href="#" onclick="changeClass()" key="one">一月</a>
+			<a href="#" onclick="changeClass()" key="two">贰月</a>
+			<a href="#"	onclick="changeClass()" key="three">叁月</a>
+			<a href="#" onclick="changeClass()" key="four">肆月</a>
+			<a href="#" onclick="changeClass()" key="five">伍月</a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

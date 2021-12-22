@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>下拉框级联</title>
+<script src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+
+	var arr = [
+			[ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+					"Saturday", "Sunday" ],
+			[ "春节", "元宵节", "中秋节", "圣诞节", "国庆节", "万圣节", "情人节" ] ];
+	function init() {
+		//alert($("#1"));
+		var index = $("#festival").val();
+		$("#1").attr("selected", "selected");
+		for ( var i in arr[index]) {
+			$("#sel").append("<option>" + arr[index][i] + "</option>");
+		}
+	}
+	function changeCity() {
+		//document.getElementById("sel").options.length=0;
+		$("#sel").html("");
+		var index = $("#festival").val();
+
+		//jquery操作
+		for ( var i in arr[index]) {
+			$("#sel").append("<option>" + arr[index][i] + "</option>");
+		}
+
+		//dom对象方法
+		/* for(var i=0;i<arr[index].length;i++){
+		 var op=new Option(arr[index][i],i);
+		 document.getElementById("sel").options.add(op);
+		 } */
+	}
+</script>
+</head>
+<body onload="init()">
+<select onchange="changeCity()" id="festival">
+<option value="0" id="1">工作日</option>
+<option value="1" id="2">节日</option>
+</select>
+<select id="sel">
+</select>
+
+<img src="images/1.jpg" width="400px" height="200px" alt="图片暂时无法访问"/>
+</body>
+</html>

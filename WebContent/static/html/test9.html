@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-1.8.2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript">
+	var arr = new Array(3);
+	function test() {
+		var arr1 = new Array(10);
+		var arr2 = new Array(10, 20);
+		var arr3 = new Array("10");
+		var arr4 = [ "10" ];
+		for (var i = 0; i < 3; i++) {
+			arr[i] = window.prompt("请输入第" + (i + 1) + "个数");
+			arr.sort();
+		}
+		alert("排序后:" + arr);
+	}
+
+	function modify() {
+		var count = 0;
+		var result;
+		//alert($("input[name='sel']").length);
+		$("input[name='sel']").each(function() {
+			if ($(this).attr("checked")) {
+				count += 1;
+				result = $(this).val();
+			}
+		});
+		if (count == 0) {
+			alert("请选择一行");
+
+		}
+		if (count > 1) {
+			alert("一次只能选择一行");
+		}
+		if (count == 1) {
+			alert("您选择了" + result);
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="button" onclick="test()" class="btn btn-success"
+		value="排序" />
+	<br />
+	<br />
+	<input type="button" onclick="modify()" value="结账"
+		class="btn btn-success" />
+	<br />
+	<input type="checkbox" name="sel" value="苹果" />苹果
+	<br />
+	<input type="checkbox" name="sel" value="桃子" />桃子
+	<br />
+	<input type="checkbox" name="sel" value="柚子" />柚子
+	<br />
+	<input type="checkbox" name="sel" value="芒果" />芒果
+	<br />
+</body>
+</html>

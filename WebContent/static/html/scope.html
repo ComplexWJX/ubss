@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="myapp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>rootScope</title>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript">
+  var mymodule=angular.module("myapp",[])
+  .run(function ($rootScope){
+     $rootScope.name="mike";
+     $rootScope.stu={
+     age:26,
+     email:"163@sina.com",
+     birth:new Date()
+      }
+  });
+   
+   var app=angular.module("app",[]);
+  app.controller("mycontroller",function($scope){
+   $scope.add=function(){
+    alert("add")
+    }
+   })
+ </script>
+</head>
+<body>
+<h2>{{name}}</h2>
+<h3>{{stu.age}}</h3>
+<h3>{{stu.birth}}</h3>
+<h3>{{stu.email}}</h3>
+<h3>{{address}}</h3>
+<div ng-controller="mycontroller" ng-app="app">
+<button ng-click="add()">click</button>
+</div>
+</body>
+</html>

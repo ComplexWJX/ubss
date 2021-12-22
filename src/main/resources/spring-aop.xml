@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd ">
+	<!--代理目标对象 -->
+	<bean id="target" class="com.itany.spring.aop.impl.LoginServiceImp">
+	</bean>
+	<!--通知 -->
+	<bean id="loginAdvice" class="com.itany.spring.aop.advice.BeforeAdviceImpl"></bean>
+	<!--织入 -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!--目标对象 -->
+		<property name="target" ref="target"></property>
+		<!--交叉业务逻辑 -->
+		<property name="interceptorNames">
+			<list>
+				<value>loginAdvice</value>
+				<value>afterAdvice</value>
+			</list>
+		</property>
+		<!--代理接口 -->
+		<property name="proxyInterfaces">
+			<list>
+				<value>com.itany.spring.aop.service.LoginService</value>
+			</list>
+		</property>
+	</bean>
+
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- 数据源 -->
+	<bean id="db1" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="${driverClassName}"></property>
+	<property name="url" value="${url}"></property>
+	<property name="username" value="${username}"></property>
+	<property name="password" value="${password}"></property>
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="dataSource" ref="db1"></property>
+	</bean>
+
+	<!-- factorybean配置 -->
+	<bean name="localJdbcTempSessionFactory" class="com.huawei.spring.ioc.LocalJdbcTempSessionFactory">
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<context:component-scan base-package="com.itany.utils"></context:component-scan>
+
+</beans>
