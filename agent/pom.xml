@@ -7,11 +7,39 @@
     <groupId>com.asiainfo.tech</groupId>
     <artifactId>agent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <parent>
-        <groupId>com.asiainfo.tech</groupId>
-        <artifactId>ubss</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.1-GA</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--java agent-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Premain-Class>com.aif.jvm.agent.JavaAgentPre</Premain-Class>
+                            <!--<Agent-Class></Agent-Class>-->
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

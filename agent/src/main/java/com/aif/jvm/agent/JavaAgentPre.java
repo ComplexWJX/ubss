@@ -1,4 +1,4 @@
-package com.asiainfo.aif.jvm.agent;
+package com.aif.jvm.agent;
 
 import java.lang.instrument.Instrumentation;
 

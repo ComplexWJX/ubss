@@ -1,4 +1,4 @@
-package com.asiainfo.aif.jvm.agent;
+package com.aif.jvm.agent;
 
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -7,7 +7,6 @@ import javassist.CtNewMethod;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
-import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.HashMap;
