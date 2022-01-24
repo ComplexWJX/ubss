@@ -1,5 +1,7 @@
 package com.asiainfo.entity;
 
+import java.util.Objects;
+
 /**
  * @author Koala
  * @description
@@ -9,6 +11,16 @@ public class User {
     private Integer userId;
     private String username;
     private String pwd;
+    private int coins;
+
+    public User() {
+    }
+
+    public User(Integer userId, String username, int coins) {
+        this.userId = userId;
+        this.username = username;
+        this.coins = coins;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -34,12 +46,26 @@ public class User {
         this.pwd = pwd;
     }
 
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", pwd='" + pwd + '\'' +
+                ", coins=" + coins +
                 '}';
     }
+
+//    @Override
+//    public int compareTo(User that) {
+//        return this.getUserId().compareTo(that.getUserId());
+//    }
 }
