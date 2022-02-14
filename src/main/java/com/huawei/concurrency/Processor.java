@@ -1,24 +1,28 @@
 package com.huawei.concurrency;
 
-import com.huawei.entity.Ticket;
-import com.huawei.concurrency.runnable.TicketRunnable;
-import com.huawei.concurrency.task.SellTask;
+import com.huawei.concurrency.task.TicketRunnable;
 
 import java.util.concurrent.Semaphore;
 
 /**
  * 测试多线程并发
+ *
  * @author WJX
  * @date 2020-06-01
  */
 public class Processor {
-	public static void main(String[] args) {
-
-	    final Semaphore semaphore = new Semaphore(4);
-		TicketRunnable ticketRunnable = new TicketRunnable(new Ticket(), semaphore);
-		for (int i = 0; i < 10; i++)
-        {
-	        new SellTask(ticketRunnable).start();
+    public static void main(String[] args) {
+        try {
+            TaskExecutor taskExecutor = new TaskExecutor();
+            final Semaphore semaphore = new Semaphore(4);
+            Ticket ticket = new Ticket();
+            for (int i = 0; i < 10; i++) {
+                TicketRunnable ticketRunnable = new TicketRunnable(ticket, semaphore);
+                taskExecutor.addTask(ticketRunnable);
+            }
+            taskExecutor.start();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-	}
+    }
 }

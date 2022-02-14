@@ -1,4 +1,4 @@
-package com.huawei.concurrency.runnable;
+package com.huawei.concurrency.task;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
