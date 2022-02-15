@@ -1,4 +1,4 @@
-package com.huawei.concurrency.lock.rwlock;
+package com.huawei.concurrency.lock.rw;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -35,15 +35,36 @@ public class ReadWriteLockFoo {
         }
     }
 
+    public void entrant() throws InterruptedException {
+        try {
+            writeLock.lock();
+            String name = Thread.currentThread().getName();
+            System.out.println(name + " entrant");
+            reentrant();
+        }finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void reentrant() throws InterruptedException {
+        try {
+            writeLock.lock();
+            String name = Thread.currentThread().getName();
+            System.out.println(name + " reentrant");
+        }finally {
+            writeLock.unlock();
+        }
+    }
+
     public static void main(String[] args) {
         ReadWriteLockFoo foo = new ReadWriteLockFoo();
-//        Thread t1 = new Thread(() -> {
-//            try {
-//                foo.read();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        });
+        Thread t1 = new Thread(() -> {
+            try {
+                foo.entrant();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
 //        Thread t2 = new Thread(() -> {
 //            try {
 //                //foo.write();
@@ -53,20 +74,20 @@ public class ReadWriteLockFoo {
 //            }
 //        });
 //
-//        t1.setName("t1");
+        t1.setName("t1");
 //        t2.setName("t2");
-//        t1.start();
+        t1.start();
 //        t2.start();
-        for (int i = 0; i < 10; i++) {
-            Thread t = new Thread(() -> {
-                try {
-                    foo.read();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            t.setName("thread" + i);
-            t.start();
-        }
+//        for (int i = 0; i < 10; i++) {
+//            Thread t = new Thread(() -> {
+//                try {
+//                    foo.read();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//            t.setName("thread" + i);
+//            t.start();
+//        }
     }
 }
