@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Premain-Class: JavaAgentPre
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Class-Path: javassist-3.20.0-GA.jar
+
