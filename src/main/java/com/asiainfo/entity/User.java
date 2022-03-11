@@ -1,7 +1,5 @@
 package com.asiainfo.entity;
 
-import java.util.Objects;
-
 /**
  * @author Koala
  * @description

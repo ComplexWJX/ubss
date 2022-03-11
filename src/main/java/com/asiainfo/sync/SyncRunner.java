@@ -1,7 +1,5 @@
 package com.asiainfo.sync;
 
-import java.util.concurrent.CompletableFuture;
-
 /**
  * @author Koala
  * @description
