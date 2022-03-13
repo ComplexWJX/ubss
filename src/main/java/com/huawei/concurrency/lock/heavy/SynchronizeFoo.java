@@ -1,4 +1,4 @@
-package com.iwhalecloud.lock;
+package com.huawei.concurrency.lock.heavy;
 
 import org.junit.Test;
 
