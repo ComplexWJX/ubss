@@ -38,7 +38,17 @@ public class ReadWriteLockFoo {
     public void write() throws InterruptedException {
         writeLock.lockInterruptibly();
         try {
-            System.out.println(Thread.currentThread().getName() + "write");
+            System.out.println(Thread.currentThread().getName() + " write");
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void writeBlock() throws InterruptedException {
+        writeLock.lockInterruptibly();
+        try {
+            System.out.println(Thread.currentThread().getName() + " write");
+            Thread.sleep(2000);
         } finally {
             writeLock.unlock();
         }
@@ -65,38 +75,97 @@ public class ReadWriteLockFoo {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * 同个线程同时获取读写锁
+     * @throws InterruptedException
+     */
+    public void getTwoLock() throws InterruptedException {
+        writeLock.lock();
+        try {
+            String name = Thread.currentThread().getName();
+            System.out.println(name + " write first");
+            readLock.lock();
+            System.out.println(name + " read after");
+        } finally {
+            readLock.unlock();
+            writeLock.unlock();
+        }
+    }
+
+    static void testReentrant() {
         ReadWriteLockFoo foo = new ReadWriteLockFoo();
-        Thread t1 = new Thread(() -> {
+        Thread t = new Thread(() -> {
             try {
                 foo.entrant();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
-//        Thread t2 = new Thread(() -> {
-//            try {
-//                //foo.write();
-//                foo.read();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//
-        t1.setName("t1");
-//        t2.setName("t2");
+        t.start();
+    }
+
+    /**
+     * 读锁共享，多个线程可以同时获取读锁
+     * 获取读锁的前提，写锁没有被独占，或者独占写锁线程为当前线程
+     */
+    static void testSharedLock() {
+        ReadWriteLockFoo foo = new ReadWriteLockFoo();
+        for (int i = 0; i < 10; i++) {
+            Thread t = new Thread(() -> {
+                try {
+                    foo.read();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            t.setName("thread" + i);
+            t.start();
+        }
+    }
+
+    static void testExclusiveLock() {
+        ReadWriteLockFoo foo = new ReadWriteLockFoo();
+
+        Thread t1 = new Thread(() -> {
+            try {
+                foo.writeBlock();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Thread t2 = new Thread(() -> {
+            try {
+                //foo.write();
+                foo.read();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        t1.setName("thread1");
+        t2.setName("thread2");
         t1.start();
-//        t2.start();
-//        for (int i = 0; i < 10; i++) {
-//            Thread t = new Thread(() -> {
-//                try {
-//                    foo.read();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//            t.setName("thread" + i);
-//            t.start();
-//        }
+        t2.start();
+    }
+
+    static void testGetTwoLockOneThread() {
+        ReadWriteLockFoo foo = new ReadWriteLockFoo();
+
+        Thread t1 = new Thread(() -> {
+            try {
+                foo.getTwoLock();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        t1.setName("thread1");
+        t1.start();
+    }
+
+    public static void main(String[] args) {
+//        testExclusiveLock();
+//        testGetTwoLockOneThread();
+        testSharedLock();
     }
 }
