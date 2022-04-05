@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Condition解决生产者消费者问题
+ * @author WJX
  */
 public class MyBlockingQueue {
     private final ReentrantLock putLock = new ReentrantLock();
@@ -16,7 +17,7 @@ public class MyBlockingQueue {
 
     Product[] products;
 
-    private AtomicInteger total = new AtomicInteger(0);
+    private final AtomicInteger total = new AtomicInteger(0);
 
     Condition notFull = putLock.newCondition();
 
@@ -32,7 +33,8 @@ public class MyBlockingQueue {
         this.capital = capital;
         products = new Product[this.capital];
     }
-    public void put () {
+
+    public void put() {
         int c = -1;
         putLock.lock();
         try {
@@ -48,9 +50,9 @@ public class MyBlockingQueue {
             if (c + 1 < capital) {
                 notFull.signal();
             }
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             putLock.unlock();
         }
         // 如果放入之前队列中无元素，则通知消费者线程消费
@@ -59,7 +61,7 @@ public class MyBlockingQueue {
         }
     }
 
-    public void take () {
+    public void take() {
         int c = -1;
         takeLock.lock();
         try {
@@ -75,9 +77,9 @@ public class MyBlockingQueue {
             if (c > 1) {
                 notEmpty.signal();
             }
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             takeLock.unlock();
         }
         // 移除元素之前队列是满的，唤醒生产线程进行添加元素
