@@ -7,7 +7,7 @@
     <param-value>utf-8</param-value>
   </context-param>
   <listener>
-    <listener-class>com.huawei.listener.WebContextListener</listener-class>
+    <listener-class>com.asiainfo.web.WebContextListener</listener-class>
   </listener>
   <servlet>
     <servlet-name>demoServlet</servlet-name>
