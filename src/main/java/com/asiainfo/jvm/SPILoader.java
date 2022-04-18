@@ -1,6 +1,6 @@
 package com.asiainfo.jvm;
 
-import com.asiainfo.web.service.Driver;
+import com.asiainfo.jvm.service.Driver;
 
 import java.util.ServiceLoader;
 

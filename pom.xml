@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.asiainfo.tech</groupId>
+    <groupId>com.asiainfo</groupId>
     <artifactId>ubss</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <finalName>console</finalName>
@@ -70,12 +70,19 @@
                 </includes>
                 <filtering>true</filtering>
             </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>META-INF/services/*.*</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 
-    <modules>
+   <!-- <modules>
         <module>agent</module>
-    </modules>
+    </modules>-->
 
     <properties>
         <!-- base setting -->
