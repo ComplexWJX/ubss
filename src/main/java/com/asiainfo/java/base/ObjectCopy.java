@@ -1,6 +1,6 @@
 package com.asiainfo.java.base;
 
-import com.asiainfo.entity.User;
+import com.asiainfo.web.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;

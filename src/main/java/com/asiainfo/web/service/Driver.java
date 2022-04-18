@@ -1,4 +1,4 @@
-package com.asiainfo.service;
+package com.asiainfo.web.service;
 
 /**
  * @author WJX

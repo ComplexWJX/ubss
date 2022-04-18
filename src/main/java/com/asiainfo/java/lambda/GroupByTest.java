@@ -1,7 +1,7 @@
 package com.asiainfo.java.lambda;
 
 
-import com.asiainfo.entity.User;
+import com.asiainfo.web.entity.User;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

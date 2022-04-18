@@ -1,4 +1,4 @@
-package com.asiainfo.entity;
+package com.asiainfo.web.entity;
 
 public class Student extends EHSObject implements Comparable<Student>{
 	private String name;

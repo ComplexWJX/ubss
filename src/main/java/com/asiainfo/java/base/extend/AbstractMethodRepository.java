@@ -1,4 +1,4 @@
-package com.asiainfo.java.base;
+package com.asiainfo.java.base.extend;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;

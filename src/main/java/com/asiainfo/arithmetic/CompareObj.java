@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.asiainfo.entity.EHSObject;
-import com.asiainfo.entity.Student;
+import com.asiainfo.web.entity.EHSObject;
+import com.asiainfo.web.entity.Student;
 
 public class CompareObj {
 	private static Logger DEBUGGER =Logger.getLogger("com.huawei");

@@ -1,4 +1,4 @@
-package com.asiainfo.entity;
+package com.asiainfo.web.entity;
 
 /**
  * @author Koala
