@@ -1,4 +1,4 @@
-package com.asiainfo;
+package com.asiainfo.java.lambda;
 
 
 import com.asiainfo.entity.User;

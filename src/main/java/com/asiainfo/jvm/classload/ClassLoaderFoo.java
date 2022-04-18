@@ -1,4 +1,4 @@
-package com.asiainfo;
+package com.asiainfo.jvm.classload;
 
 import com.asiainfo.util.JarClassLoader;
 import org.apache.commons.io.IOUtils;
@@ -9,12 +9,12 @@ import java.net.URL;
 
 /**
  * @author WJX
- * @title: TestClassLoader
+ * @title: ClassLoaderFoo
  * @projectName ubss
  * @description: TODO
  * @date 2020/8/25 0025
  */
-public class TestClassLoader {
+public class ClassLoaderFoo {
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class TestClassLoader {
 
             Object instance = loadClass.newInstance();
             Method method = loadClass.getMethod("copy", InputStream.class, OutputStream.class);
-            InputStream in = TestClassLoader.class.getClassLoader().getResourceAsStream("log4j.xml");
+            InputStream in = ClassLoaderFoo.class.getClassLoader().getResourceAsStream("log4j.xml");
             OutputStream out = new FileOutputStream("log4j.copy.xml");
             method.invoke(instance,in,out);
             IOUtils.closeQuietly(in);

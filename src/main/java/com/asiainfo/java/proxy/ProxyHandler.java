@@ -1,4 +1,4 @@
-package com.asiainfo.java.api;
+package com.asiainfo.java.proxy;
 
 /**
  * @ClassName ProxyHandler

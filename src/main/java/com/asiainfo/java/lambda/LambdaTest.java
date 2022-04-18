@@ -1,4 +1,4 @@
-package com.asiainfo.java.concurrency.lambda;
+package com.asiainfo.java.lambda;
 
 import org.junit.Test;
 

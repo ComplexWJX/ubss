@@ -6,12 +6,12 @@ import java.util.ServiceLoader;
 
 /**
  * @author WJX
- * @title: JvmFoo
+ * @title: SPILoader
  * @projectName ubss
  * @description: TODO
  * @date 2021/10/8 0008
  */
-public class JvmFoo {
+public class SPILoader {
     public static void main(String[] args) {
 //        ConfigManager configManager = new ConfigManager();
         ServiceLoader<Driver> objects = ServiceLoader.load(Driver.class);

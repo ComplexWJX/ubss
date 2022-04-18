@@ -1,4 +1,4 @@
-package com.huawei.design;
+package com.asiainfo.java.designmode.singleton;
 
 public class Singleton
 {
