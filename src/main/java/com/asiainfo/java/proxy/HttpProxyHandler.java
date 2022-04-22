@@ -7,9 +7,9 @@ package com.asiainfo.java.proxy;
  * @Date Create in 2021/8/8 16:28
  * @Version 1.0
  */
-public class DefaultProxyhandler implements ProxyHandler {
+public class HttpProxyHandler implements ProxyHandler {
     @Override
     public void handle(String[] args) {
-        System.out.println("default");
+        System.out.println("http proxy");
     }
 }
