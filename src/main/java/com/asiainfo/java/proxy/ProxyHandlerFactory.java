@@ -3,6 +3,7 @@ package com.asiainfo.java.proxy;
 import org.springframework.scheduling.annotation.Async;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ProxyHandlerFactory {
         Class<?>[] interfaces = ProxyHandler.class.getInterfaces();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException, InvocationTargetException {
 //        System.out.println(ProxyHandler.class.isAssignableFrom(AbstratProxyHandler.class));// true
 //        System.out.println(AbstratProxyHandler.class.isAssignableFrom(ProxyHandler.class));// false
         List<Class<?>> classList = null;
@@ -30,7 +31,7 @@ public class ProxyHandlerFactory {
                 Method[] declaredMethods = aClass.getDeclaredMethods();
                 for (Method method : declaredMethods) {
                     if (method.getAnnotation(Async.class) != null) {
-                        System.out.println("match");
+                        method.invoke(aClass.newInstance(), new Object[]{new String[]{"hello boy"}});
                     }
                 }
             }
