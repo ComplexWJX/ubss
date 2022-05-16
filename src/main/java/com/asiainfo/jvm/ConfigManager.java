@@ -8,6 +8,7 @@ package com.asiainfo.jvm;
  * @date 2021/10/8 0008
  */
 public class ConfigManager {
+//    private int state;
     public ConfigManager() {
         this.load();
     }
