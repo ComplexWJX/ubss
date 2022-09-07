@@ -8,6 +8,9 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * @author rukawa
+ */
 public class EchoReactorServer implements Runnable {
     Selector selector;
     public EchoReactorServer() throws IOException {
