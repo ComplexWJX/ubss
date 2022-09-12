@@ -1,4 +1,4 @@
-package com.asiainfo.java.nio;
+package com.asiainfo.java.io.bio;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,8 +18,8 @@ public class ChannelDemo {
     private final static int BSIZE = 1024;
 
     public static void main(String[] args) {
-//         bufferRead();
-        bufferWrite();
+         bufferRead();
+//        bufferWrite();
     }
 
     private static void bufferRead() {
@@ -28,13 +28,16 @@ public class ChannelDemo {
             ByteBuffer bf = ByteBuffer.allocate(BSIZE);
             channel.read(bf);
             bf.flip();
-            System.out.println(bf.capacity()); //缓冲区的容量
-            System.out.println((char) bf.get(0)); //读取指定位置
+            //缓冲区的容量
+            System.out.println(bf.capacity());
+            //读取指定位置
+            System.out.println((char) bf.get(0));
             while (bf.hasRemaining()) {
                 System.out.println((char) bf.get());
             }
-            while (channel.read(bf) != -1) {
-
+            int len;
+            while ((len = channel.read(bf)) != -1) {
+                System.out.println(bf.get(len));
             }
         } catch (Exception e) {
             e.printStackTrace();

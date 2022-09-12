@@ -1,4 +1,4 @@
-package com.asiainfo.java.nio.original;
+package com.asiainfo.java.io.bio.original;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
