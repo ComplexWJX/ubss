@@ -53,7 +53,7 @@ public class EchoReactorServer implements Runnable {
             // 事件集
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             //selectionKeys.iterator()
-            for (Iterator<SelectionKey> it = selectionKeys.iterator(); it.hasNext();) {
+            for (Iterator<SelectionKey> it = selectionKeys.iterator(); it.hasNext(); ) {
                 SelectionKey key = it.next();
                 dispatch(key);
                 //处理完成后移除选择器
@@ -64,57 +64,51 @@ public class EchoReactorServer implements Runnable {
 
     private void dispatch(SelectionKey selectionKey) throws IOException {
         if (selectionKey.isAcceptable()) {
-            AcceptHandler handler = (AcceptHandler) selectionKey.attachment();
-            handler.handleAccept();
+            handleAccept();
         } else if (selectionKey.isConnectable()) {
             System.out.println("channel connected...");
         } else if (selectionKey.isReadable()) {
             // todo do read
-            ReadHandler handler = new ReadHandler((SocketChannel) selectionKey.channel(), selector);
-            handler.run();
+            handleRead(selectionKey);
         } else if (selectionKey.isWritable()) {
             // todo do write
             System.out.println("channel can write...");
         }
     }
 
+    private void dispatch1(SelectionKey selectionKey) {
+        Runnable handler = (Runnable) selectionKey.attachment();
+        handler.run();
+    }
 
-    private static class ReadHandler implements Runnable {
-        SocketChannel clientChannel;
+    private void handleAccept() throws IOException {
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        socketChannel.configureBlocking(false);
+        // 客户端注册读事件，会后续收消息做准备
+        socketChannel.register(selector, SelectionKey.OP_READ);
+        String str = "receive client from " + socketChannel.getRemoteAddress() + "...";
+        System.out.println(str);
+        socketChannel.write(ByteBuffer.wrap("hello, client,i am server.".getBytes(StandardCharsets.UTF_8)));
+    }
 
-        SelectionKey sk;
-
-        public ReadHandler(SocketChannel socketChannel, Selector selector) throws IOException {
-            this.clientChannel = socketChannel;
-            socketChannel.configureBlocking(false);
-            sk = socketChannel.register(selector, 0);
-            // 单独设置感兴趣事件
-            sk.interestOps(SelectionKey.OP_READ);
-            sk.attach(this);
-        }
-
-        @Override
-        public void run() {
-            handleRead();
-        }
-
-        private void handleRead() {
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-            if (byteBuffer.hasRemaining()) {
+    private void handleRead(SelectionKey selectionKey) {
+        SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        if (byteBuffer.hasRemaining()) {
+            try {
+                socketChannel.read(byteBuffer);
+                System.out.println("client sent message: { " + new String(byteBuffer.array()) + " } from client");
+            } catch (IOException e) {
+                // 剔除关闭socket客户端
                 try {
-                    clientChannel.read(byteBuffer);
-                    System.out.println("client sent message: { " + new String(byteBuffer.array()) + " } from client");
-                } catch (IOException e) {
-                    // 剔除关闭socket客户端
-                    try {
-                        System.out.println(clientChannel.getRemoteAddress() + "下线");
-                        clientChannel.close();
-                    } catch (IOException ioe) {
-                        //ioe.printStackTrace();
-                    }
-                    e.printStackTrace();
+                    System.out.println(socketChannel.getRemoteAddress() + "下线");
+                    socketChannel.close();
+                } catch (IOException ioe) {
+                    //ioe.printStackTrace();
                 }
+                e.printStackTrace();
             }
         }
     }
+
 }
