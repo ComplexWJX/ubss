@@ -45,11 +45,11 @@ public class TicketRunnable implements Runnable {
         while (!isStop) {
             String tName = Thread.currentThread().getName();
             try {
+                //使用信号量Semaphore限流
                 //semaphore.acquire();
                 //System.out.println("目前并发数:" + semaphore.availablePermits());
-                synchronized (this.ticket) {
+                synchronized (this.ticket) { // 如果此处不加锁，同时读到库存>0，会出现超卖
                     if (ticket.getTotal() > 0) {
-                        // 如果已经抢到2张该线程让出，使用信号量Semaphore限流
 //                        if(ticket.getLimit() > 2){
 //                            return;
 //                        }else{

@@ -28,8 +28,18 @@ public class SynchronizeFoo {
 
     private final Object lock = new Object();
 
+    private synchronized void lockMethod(String name) {
+        try {
+            System.out.println("lockMethod:");
+            lock.wait(2000);
+            System.out.println(name + " release lock");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void methodA(String name) {
-        synchronized (lock) {
+        synchronized (SynchronizeFoo.class) {
             try {
                 System.out.println("name:" + name);
                 lock.wait(2000);
