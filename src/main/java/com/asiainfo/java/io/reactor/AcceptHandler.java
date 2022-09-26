@@ -38,7 +38,6 @@ public class AcceptHandler implements Runnable {
             new IoHandler(socketChannel, selector);
             socketChannel.configureBlocking(false);
             // 客户端注册读事件，会后续收消息做准备
-            socketChannel.register(selector, SelectionKey.OP_READ);
             String str = "receive client from " + socketChannel.getRemoteAddress() + "...";
             System.out.println(str);
             socketChannel.write(ByteBuffer.wrap("hello, client,i am server.".getBytes(StandardCharsets.UTF_8)));

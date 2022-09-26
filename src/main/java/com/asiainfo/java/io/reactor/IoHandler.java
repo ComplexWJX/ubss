@@ -21,7 +21,7 @@ public class IoHandler implements Runnable {
     public IoHandler(SocketChannel socketChannel, Selector selector) throws IOException {
         this.clientChannel = socketChannel;
         socketChannel.configureBlocking(false);
-        // todo 此处selector是否需要传入？
+        // 客户端注册AcceptHandle连接时传过来的选择器，后面轮询事件保证是从同一个选择获取事件
         sk = socketChannel.register(selector, 0);
         // 单独设置感兴趣事件
         sk.interestOps(SelectionKey.OP_READ);
@@ -40,7 +40,7 @@ public class IoHandler implements Runnable {
                 clientChannel.read(byteBuffer);
                 System.out.println("client sent message: { " + new String(byteBuffer.array()) + " } from client");
             } catch (IOException e) {
-                // 剔除关闭socket客户端
+                // 客户端断开连接会触发read事件，剔除关闭socket客户端
                 try {
                     System.out.println(clientChannel.getRemoteAddress() + "下线");
                     clientChannel.close();

@@ -3,8 +3,6 @@ package com.asiainfo.java.io.reactor;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -22,11 +20,9 @@ public class EchoReactorClient {
 
     private static void establish() {
         try {
-            Selector selector = Selector.open();
             SocketChannel client = SocketChannel.open(new InetSocketAddress(8088));
             // 如下两句必须同时设置，通道为非阻塞才能向Selector注册
             client.configureBlocking(false);
-            SelectionKey selectionKey = client.register(selector, SelectionKey.OP_READ);
             doSend(client);
         } catch (Exception e) {
             e.printStackTrace();

@@ -78,7 +78,9 @@ public class SingleThreadReactorServer implements Runnable {
 
     private void dispatch(SelectionKey selectionKey) {
         Runnable handler = (Runnable) selectionKey.attachment();
-        handler.run();
+        if (null != handler) {
+            handler.run();
+        }
     }
 
 }
