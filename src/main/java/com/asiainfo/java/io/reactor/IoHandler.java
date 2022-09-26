@@ -21,6 +21,7 @@ public class IoHandler implements Runnable {
     public IoHandler(SocketChannel socketChannel, Selector selector) throws IOException {
         this.clientChannel = socketChannel;
         socketChannel.configureBlocking(false);
+        // todo 此处selector是否需要传入？
         sk = socketChannel.register(selector, 0);
         // 单独设置感兴趣事件
         sk.interestOps(SelectionKey.OP_READ);
@@ -32,7 +33,7 @@ public class IoHandler implements Runnable {
         handleRead();
     }
 
-    private void handleRead() {
+    public void handleRead() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         if (byteBuffer.hasRemaining()) {
             try {

@@ -8,6 +8,6 @@ package com.asiainfo.java.io.reactor;
  */
 public class NioServerStarter {
     public static void main(String[] args) {
-        new Thread(new EchoReactorServer()).start();
+        new Thread(new SingleThreadReactorServer()).start();
     }
 }
