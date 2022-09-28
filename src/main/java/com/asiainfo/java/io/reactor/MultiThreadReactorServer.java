@@ -56,7 +56,7 @@ public class MultiThreadReactorServer {
     /**
      * 子反应器，用于分发事件
      */
-    static class SubReactor implements Runnable {
+    class SubReactor implements Runnable {
         Selector selector;
 
         public SubReactor(Selector selector) {
@@ -74,6 +74,8 @@ public class MultiThreadReactorServer {
         }
 
         private void doSelect() throws IOException {
+            // 内部类调用外部类的方式
+            //MultiThreadReactorServer.this.startServer();
             while (!Thread.interrupted()) {
                 selector.select();
                 //事件集
@@ -86,6 +88,19 @@ public class MultiThreadReactorServer {
                     selectionKeys.remove(key);
                 }
             }
+            System.out.println("Thread:" + Thread.currentThread().getName() + "is interrupted.");
+//            for(;;) {
+//                selector.select();
+//                //事件集
+//                Set<SelectionKey> selectionKeys = selector.selectedKeys();
+//                //selectionKeys.iterator()
+//                for (Iterator<SelectionKey> it = selectionKeys.iterator(); it.hasNext(); ) {
+//                    SelectionKey key = it.next();
+//                    dispatch(key);
+//                    //处理完成后移除选择器
+//                    selectionKeys.remove(key);
+//                }
+//            }
         }
 
         private void dispatch(SelectionKey selectionKey) {

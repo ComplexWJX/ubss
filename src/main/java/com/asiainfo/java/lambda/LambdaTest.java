@@ -24,28 +24,12 @@ public class LambdaTest {
     }
 
     @Test
-    public void test2(){
-        testLambda();
-    }
-
-    private static void num(){
-        Random random = new Random();
-        // 绘制字符
-        StringBuilder strCode = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            String rand = String.valueOf(random.nextInt(10));
-            strCode.append(rand);
-        }
-        System.out.println(strCode);
-    }
-
-    private void testLambda(){
+    public void testSupply(){
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
         list.add(4);
-
         CompletableFuture.supplyAsync(()->{
             int total=0;
             for (Integer i:list){
@@ -60,5 +44,16 @@ public class LambdaTest {
             System.out.println(r);
             return null;
         });
+    }
+
+    private static void num(){
+        Random random = new Random();
+        // 绘制字符
+        StringBuilder strCode = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            String rand = String.valueOf(random.nextInt(10));
+            strCode.append(rand);
+        }
+        System.out.println(strCode);
     }
 }

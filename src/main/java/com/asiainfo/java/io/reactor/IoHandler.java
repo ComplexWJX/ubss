@@ -20,10 +20,10 @@ public class IoHandler implements Runnable {
 
     public IoHandler(SocketChannel socketChannel, Selector selector) throws IOException {
         this.clientChannel = socketChannel;
-        socketChannel.configureBlocking(false);
+        this.clientChannel.configureBlocking(false);
         selector.wakeup();
         // 客户端注册AcceptHandle连接时传过来的选择器，后面轮询事件保证是从同一个选择获取事件
-        sk = socketChannel.register(selector, 0);
+        sk = this.clientChannel.register(selector, 0);
         // 单独设置感兴趣事件
         sk.interestOps(SelectionKey.OP_READ);
         sk.attach(this);

@@ -11,9 +11,34 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2020/6/20 0020
  */
 public class InterruptTest {
-    public static void main(String[] args) {
-        System.out.println(Runtime.getRuntime().availableProcessors());
+    private static Thread thread;
+    public static void main(String[] args) throws InterruptedException {
+//        System.out.println(Runtime.getRuntime().availableProcessors());
 //        interruptByFuture();
+        startOneThread();
+        Thread.sleep(500);
+        thread.interrupt();
+    }
+
+    private static void startOneThread() {
+        thread = new Thread() {
+            @Override
+            public void run() {
+                while (!Thread.interrupted()) {
+                    try {
+                        sleep(200);
+                    } catch (InterruptedException e) {
+                        System.out.println(isInterrupted()); //false
+                        System.out.println(interrupted()); //false
+                        interrupt();
+                        System.out.println(isInterrupted()); //true
+                        System.out.println(interrupted());//true
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
     }
 
     private static void interruptByThread(){

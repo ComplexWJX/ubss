@@ -9,9 +9,9 @@ package com.asiainfo.java.io.reactor;
 public class NioServerStarter {
     public static void main(String[] args) {
         // 单线程reactor
-        new Thread(new SingleThreadReactorServer()).start();
+//        new Thread(new SingleThreadReactorServer()).start();
 
         // 多线程reactor todo 多个selector为什么ioHandler监听不到read事件？
-//        new MultiThreadReactorServer().startServer();
+        new MultiThreadReactorServer().startServer();
     }
 }
