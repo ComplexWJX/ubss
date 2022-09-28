@@ -11,7 +11,7 @@ public class NioServerStarter {
         // 单线程reactor
         new Thread(new SingleThreadReactorServer()).start();
 
-        // 多线程reactor
-        new MultiThreadReactorServer().startServer();
+        // 多线程reactor todo 多个selector为什么ioHandler监听不到read事件？
+//        new MultiThreadReactorServer().startServer();
     }
 }

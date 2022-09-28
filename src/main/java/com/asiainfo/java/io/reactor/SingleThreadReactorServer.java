@@ -48,7 +48,8 @@ public class SingleThreadReactorServer implements Runnable {
     }
 
     private void doSelect() throws IOException {
-        while (selector.select() > 0) {
+        while (!Thread.interrupted()) {
+            selector.select();
             // 事件集
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
             //selectionKeys.iterator()
