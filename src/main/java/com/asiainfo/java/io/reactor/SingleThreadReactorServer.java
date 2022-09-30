@@ -63,7 +63,7 @@ public class SingleThreadReactorServer implements Runnable {
     }
 
     @SuppressWarnings("unused")
-    private void handleBlocked(SelectionKey selectionKey) throws IOException {
+    private void dispatchAndHandle(SelectionKey selectionKey) throws IOException {
         if (selectionKey.isAcceptable()) {
             new AcceptHandler(serverSocketChannel, selector).handleAccept();
         } else if (selectionKey.isConnectable()) {

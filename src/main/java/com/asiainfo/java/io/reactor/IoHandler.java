@@ -18,13 +18,20 @@ public class IoHandler implements Runnable {
 
     SelectionKey sk;
 
+    /**
+     * 1.register前调用wakeup 目的就是向事件通道写入一个字节，将 doSelect 从阻塞中唤醒，
+     *   从而继续向下运行释放 publicKeys 锁，给 register 方法运行的机会；
+     * 2.因为处理客户端连接之前，IO事件轮询的selector(selectors[1])已经开始循环调用 select 产生阻塞，所以此处必须调用 wakeup 去唤醒
+     * 3.单线程reactor不需要调用wakeup，因为是共用一个 selector ，客户端socket注册的时候，selector 并没有阻塞，在同一个线程中
+     */
     public IoHandler(SocketChannel socketChannel, Selector selector) throws IOException {
         this.clientChannel = socketChannel;
         this.clientChannel.configureBlocking(false);
-        selector.wakeup();
         // 客户端注册AcceptHandle连接时传过来的选择器，后面轮询事件保证是从同一个选择获取事件
+        selector.wakeup();
         sk = this.clientChannel.register(selector, 0);
         // 单独设置感兴趣事件
+        selector.wakeup();
         sk.interestOps(SelectionKey.OP_READ);
         sk.attach(this);
     }
