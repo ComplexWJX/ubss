@@ -1,5 +1,7 @@
 package com.asiainfo.web.entity;
 
+import java.math.BigDecimal;
+
 /**
  * @author Koala
  * @description
@@ -9,12 +11,12 @@ public class User {
     private Integer userId;
     private String username;
     private String pwd;
-    private int coins;
+    private BigDecimal coins;
 
     public User() {
     }
 
-    public User(Integer userId, String username, int coins) {
+    public User(Integer userId, String username, BigDecimal coins) {
         this.userId = userId;
         this.username = username;
         this.coins = coins;
@@ -44,11 +46,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public int getCoins() {
+    public BigDecimal getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
+    public void setCoins(BigDecimal coins) {
         this.coins = coins;
     }
 
@@ -67,15 +69,4 @@ public class User {
 //        return this.getUserId().compareTo(that.getUserId());
 //    }
 
-    public static void main(String[] args) {
-        User u1 = new User();
-        u1.setUsername("tom");
-        // u2的引用指向u1第一次的堆内存地址
-        User u2 = u1;
-        System.out.println(u1.hashCode());
-        u1 = new User();
-        //u1.setUsername("mike");
-        System.out.println(u1.hashCode());
-        System.out.println(u2.hashCode());
-    }
 }
