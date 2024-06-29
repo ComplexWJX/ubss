@@ -7,5 +7,6 @@
 *.iml
 out
 gen
-.idea/shelf/
-.idea/workspace.xml
+target
+build
+.gitignore

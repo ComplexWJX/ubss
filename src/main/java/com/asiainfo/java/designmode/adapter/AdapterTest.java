@@ -1,5 +1,7 @@
 package com.asiainfo.java.designmode.adapter;
 
+import org.junit.Test;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -11,5 +13,11 @@ public class AdapterTest {
     public static void main(String[] args) {
         Target target = new Adapter(new Adaptee());
         target.request();
+    }
+
+    @Test
+    public void testMultiImpl() {
+        IFunctionA function = new FunctionImpl();
+        function.functionB().funcB();
     }
 }
