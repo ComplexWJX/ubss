@@ -41,7 +41,7 @@
 	</bean>
 
 	<!-- factorybean配置 -->
-	<bean name="localJdbcTempSessionFactory" class="com.asiainfo.spring.ioc.LocalJdbcTempSessionFactory">
+	<bean name="localJdbcTempSessionFactory" class="com.jaxon.spring.ioc.LocalJdbcTempSessionFactory">
 	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 

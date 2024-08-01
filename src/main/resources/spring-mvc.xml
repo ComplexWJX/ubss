@@ -12,7 +12,7 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
 	<!-- handler/controller  -->
-    <context:component-scan base-package="com.asiainfo.controller"></context:component-scan>
+    <context:component-scan base-package="com.jaxon.controller"></context:component-scan>
 
 	<mvc:annotation-driven/>
 

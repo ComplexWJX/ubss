@@ -23,8 +23,8 @@ public class JavaAgentTransformer implements ClassFileTransformer {
     final static Map<String, List<String>> methodMap = new HashMap<String, List<String>>();
 
     public JavaAgentTransformer() {
-        add("com.asiainfo.aif.jvm.agent.TimeTest.sayHello");
-        //add("com.asiainfo.aif.jvm.agent.TimeTest.sayHello2");
+        add("com.jaxon.aif.jvm.agent.TimeTest.sayHello");
+        //add("com.jaxon.aif.jvm.agent.TimeTest.sayHello2");
     }
 
     private void add(String methodString) {

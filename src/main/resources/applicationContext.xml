@@ -25,7 +25,7 @@
     <mvc:annotation-driven />
 
     <!--扫描注解-->
-    <context:component-scan base-package="com.asiainfo.aif.service">
+    <context:component-scan base-package="com.jaxon.aif.service">
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
         <context:exclude-filter type="annotation"
