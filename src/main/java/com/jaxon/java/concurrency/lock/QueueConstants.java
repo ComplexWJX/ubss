@@ -9,6 +9,6 @@ package com.jaxon.java.concurrency.lock;
  * @description
  */
 public class QueueConstants {
-    public static final int ONE_BILLION_NUM = 10000000;
-    public static final int FIVE_BILLION_NUM = 50000000;
+    public static final int TEN_MILLION_NUM = 10000000;
+    public static final int FIVE_MILLION_NUM = 50000000;
 }
