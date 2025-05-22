@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author koala
+ * ringbuffer单生产单消费模式 测试: 10千万耗时接近，5千万耗时ringbuffer明显更短
  */
 public class SingleProducerSingleConsumerDemo {
 
@@ -27,7 +28,7 @@ public class SingleProducerSingleConsumerDemo {
         long start = System.currentTimeMillis();
 
 //        new Thread(() -> {
-            for (int i = 0; i < QueueConstants.ONE_BILLION_NUM; i++) {
+            for (int i = 0; i < QueueConstants.FIVE_MILLION_NUM; i++) {
                 eventProducer.produce("task [" + i +"]");
             }
             System.out.println("put耗时：" + ((System.currentTimeMillis() - start)) + "ms");
@@ -62,7 +63,7 @@ public class SingleProducerSingleConsumerDemo {
         public void onEvent(Event event, long sequence, boolean endOfBatch) {
 //            System.out.println("Consumed: " + event.getMessage());
             i++;
-            if (i == QueueConstants.ONE_BILLION_NUM) {
+            if (i == QueueConstants.FIVE_MILLION_NUM) {
                 System.out.println("get耗时：" + ((System.currentTimeMillis() - startTime)) + "ms");
             }
 

@@ -15,12 +15,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class BlockQueueFoo {
     public static void main(String[] args) {
 
-        ArrayBlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(QueueConstants.ONE_BILLION_NUM);
+        ArrayBlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(QueueConstants.FIVE_MILLION_NUM);
 
         final long start = System.currentTimeMillis();
 
         new Thread(() -> {
-            for (int i = 0; i < QueueConstants.ONE_BILLION_NUM; i++) {
+            for (int i = 0; i < QueueConstants.FIVE_MILLION_NUM; i++) {
                 try {
                     blockingQueue.put(i + "");
                 } catch (InterruptedException e) {
@@ -32,7 +32,7 @@ public class BlockQueueFoo {
 
 
         new Thread(() -> {
-            for (int i = 0; i < QueueConstants.ONE_BILLION_NUM; i++) {
+            for (int i = 0; i < QueueConstants.FIVE_MILLION_NUM; i++) {
                 try {
                     blockingQueue.take();
                 } catch (InterruptedException e) {
