@@ -1,15 +1,15 @@
 package com.itany.arithmetic;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+
 import org.junit.Test;
 
 /**
- * @author 约瑟夫环的研究
+ * @author koala
+ * 约瑟夫环的研究
  */
-public class Test5 {
+public class JosephRing {
 	// TODO
 	public static void main(String[] args) {
 		int[] a = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };

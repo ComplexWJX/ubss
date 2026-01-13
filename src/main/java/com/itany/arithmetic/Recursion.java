@@ -3,7 +3,7 @@ package com.itany.arithmetic;
 /**
  * 递归
  */
-public class Test1 {
+public class Recursion {
 	public static void main(String[] args) {
 		long f = f(100);
 		System.out.println(f);
