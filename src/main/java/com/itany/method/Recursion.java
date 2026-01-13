@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.itany.method.impl.LoginImpl;
 
 
-public class Test1 {
+public class Recursion {
 
 	public static void main(String[] args) {
 		testProxy("mike","123");
